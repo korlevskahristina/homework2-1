@@ -2,6 +2,7 @@ package com.example.homework2_1;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,5 +24,15 @@ ArrayAdapter<String> adapter;
         itemList = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(this, R.layout.list_row,R.id.txtview,itemList);
         listV.setAdapter(adapter);
+        btAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newItem = editText.getText().toString();
+                String newItem1 = editText1.getText().toString();
+                String two = newItem + "-" + newItem1;
+                itemList.add(two);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }
