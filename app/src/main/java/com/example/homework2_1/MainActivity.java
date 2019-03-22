@@ -1,5 +1,7 @@
 package com.example.homework2_1;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,9 +31,21 @@ ArrayAdapter<String> adapter;
             public void onClick(View v) {
                 String newItem = editText.getText().toString();
                 String newItem1 = editText1.getText().toString();
-                String two = newItem + "-" + newItem1;
-                itemList.add(two);
-                adapter.notifyDataSetChanged();
+                final String two = newItem + "-" + newItem1;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Are you sure you want to add?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                itemList.add(two);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }).setNegativeButton("Cancel", null);
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
             }
         });
     }
